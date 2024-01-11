@@ -1,4 +1,4 @@
 White Percentage,No. of Cluster,Cluster Size,Vertical Coords Start,Vertical Coords End,Horizontal Coords Start,Horizontal Coords End,Diagonal Coords Start,Diagonal Coords End,Combination Coords Start,Combination Coords End
-0.04,6,6, , , , ,"(64, 30)","(86, 52)", , 
- , , , , , , ,"(57, 58)","(62, 63)", , 
- , , , , , , ,"(58, 64)","(55, 67)", , 
+0.05,5,7, , , , ,"(70, 14)","(91, 35)", , 
+ , , , , , , ,"(83, 18)","(87, 14)", , 
+ , , , , , , , , , , 
