@@ -1,0 +1,6 @@
+Things to add in for flask
+- CSS nicely
+- Flask-WTF 
+	- Allow upload only if file chosen
+	- Security
+- Multifile

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV File Upload</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+</head>
+<style>
+  * {
+    margin: 0%;
+    padding: 0%;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+  }
+
+  /* Style for grid items */
+  .grid-item {
+    background-color: #e0e0e0;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .heading {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .buttons {
+    padding: 20px;
+  }
+</style>
+
+<body>
+  <header class="heading">
+    <h1>
+      LASSO
+    </h1>
+  </header>
+  <div class=grid-container>
+    <div class="grid-item"> CSV
+      {% if tables %}
+      {% for table in tables %}
+      {{ table|safe }}
+      {% endfor %}
+      <script>
+        $(document).ready(function () {
+          $('.data').DataTable();
+        });
+      </script>
+      {% endif %}
+    </div>
+    <div class="image"> <img src="../static/arrow.png" alt="arrow"></div>
+    <div class="grid-item"> Output image
+      {% if img_data %}
+      <img src="data:image/png;base64,{{ img_data }}" alt="Output Image">
+      {% endif %}
+    </div>
+  </div>
+  <form action="/upload" method="post" enctype="multipart/form-data" class="buttons">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+  </form>
+</body>
+
+</html>
