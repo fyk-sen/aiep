@@ -11,20 +11,26 @@
     padding: 0%;
     }
     .grid-container {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas: "csv arrow image";
+            grid-template-columns: 1fr 0.5fr 1.5fr;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
             padding: 20px;
+            align-items: center;
+
+        
+
         }
 
         /* Style for grid items */
-        .grid-item {
-            background-color: #e0e0e0;
+        .heading {
             padding: 20px;
             text-align: center;
-            border: 1px solid #ccc;
-        }
-        .heading {
+        }       
+        .grid-item {
             padding: 20px;
             text-align: center;
         }
@@ -39,15 +45,18 @@
         </h1>
     </header>
     <div class = grid-container>
-        <div class="grid-item"> Input image</div>
+        <div class="grid-item"> Input image <div class="buttons">
+            <input type="submit" value="Upload">
+        </div>
+        <div class="buttons">
+            <input type="submit" value="Submit">
+        </div></div>
         <div class="image"> <img src="../images/arrow.png" alt="arrow"></div>
-        <div class ="grid-item"> Output image</div>
+        <div class ="grid-item"> Output image <div class ="buttons">
+            <input type="submit" value="Classify">
+        </div></div>
     </div>
-    <div class="buttons">
-        <input type="submit" value="Upload">
-    </div>
-    <div class="buttons">
-        <input type="submit" value="Submit">
-    </div>
+    
+    
 </body>
 </html>
