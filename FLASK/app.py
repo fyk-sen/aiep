@@ -3,7 +3,6 @@ import pandas as pd
 from io import StringIO, BytesIO
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
 import base64
 
 app = Flask(__name__)
@@ -27,11 +26,6 @@ def generate_image(df):
 
     return encoded_image
 
-@app.route('/display_image')
-def display_image():
-    img_data = request.args.get('img_data', '')
-    return send_file(BytesIO(base64.b64decode(img_data)), mimetype='image/png')
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -49,17 +43,12 @@ def upload():
     if file:
         content = file.read().decode("utf-8")
         df = pd.read_csv(StringIO(content))
-        first_5_rows = df.head()
         
         # Generate the image
         image_data = generate_image(df)
         
-        return render_template('index.html', tables=[first_5_rows.to_html(classes='data')],
+        return render_template('index.html', tables=[df.to_html(classes='data')],
                                img_data=image_data)
 
-@app.route('/image')
-def get_image():
-    img_data = request.args.get('img_data', '')
-    return send_file(BytesIO(img_data), mimetype='image/png')
 if __name__ == '__main__':
     app.run(debug=True)
