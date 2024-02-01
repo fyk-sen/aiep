@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <style>
-    *{
-    margin: 0%;
-    padding: 0%;
+    * {
+        margin: 0%;
+        padding: 0%;
     }
+
     .grid-container {
 
-            display: grid;
-            grid-template-areas: "csv arrow image";
-            grid-template-columns: 1fr 0.5fr 1.5fr;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px;
-            align-items: center;
+        display: grid;
+        grid-template-areas: "csv arrow image";
+        grid-template-columns: 1fr 0.5fr 1.5fr;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        align-items: center;
 
-        
 
-        }
 
-        /* Style for grid items */
-        .heading {
-            padding: 20px;
-            text-align: center;
-        }       
-        .grid-item {
-            padding: 20px;
-            text-align: center;
-        }
-        .buttons{
-            padding: 20px;
-        }
+    }
+
+    /* Style for grid items */
+    .heading {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .grid-item {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .buttons {
+        padding: 20px;
+    }
 </style>
+
 <body>
     <header class="heading">
         <h1>
             LASSO
         </h1>
     </header>
-    <div class = grid-container>
+    <div class=grid-container>
         <div class="grid-item"> Input image <div class="buttons">
-            <input type="submit" value="Upload">
+                <input type="submit" value="Upload">
+            </div>
+            <div class="buttons">
+                <input type="submit" value="Submit">
+            </div>
         </div>
-        <div class="buttons">
-            <input type="submit" value="Submit">
-        </div></div>
         <div class="image"> <img src="../images/arrow.png" alt="arrow"></div>
-        <div class ="grid-item"> Output image <div class ="buttons">
-            <input type="submit" value="Classify">
-        </div></div>
+        <div class="grid-item"> Output image <div class="buttons">
+                <input type="submit" value="Classify">
+            </div>
+        </div>
     </div>
-    
-    
+
+
 </body>
+
 </html>
