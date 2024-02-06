@@ -10,6 +10,9 @@
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 </head>
 <style>
+
+  
+
   * {
     margin: 0%;
     padding: 0%;
@@ -17,60 +20,104 @@
 
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 3fr 3fr;
+    -ms-grid-column-align: center;
     gap: 10px;
-    padding: 20px;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Style for grid items */
   .grid-item {
-    background-color: #e0e0e0;
     padding: 20px;
     text-align: center;
-    border: 1px solid #ccc;
+    display: flex;
+
+  }
+
+  .grid-item2 {
+    text-align: left;
+    padding: 20px;
+    display: flex;
   }
 
   .heading {
     padding: 20px;
     text-align: center;
+    font-family: Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif ;
+    font-size: 2em;
+    background-image: linear-gradient(to top, rgba(255,0,0,0), #6699ff);
   }
 
-  .buttons {
+  .text{
     padding: 20px;
+    text-align: left;
+    font-family: Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif ;
+    font-size: 2em;
   }
+
 </style>
 
 <body>
   <header class="heading">
     <h1>
-      LASSO
+      AZURE DEFECT CLASSIFICATION
     </h1>
+    <p style="font-size: larger;">Nanyang Polytechnic EGT217-AI Engineering Project</p>
   </header>
+
   <div class=grid-container>
-    <div class="grid-item"> CSV
+    <div class="text">
+      CSV
+    </div>
+    
+    <div class="text">
+      Output 
+    </div>
+  </div>
+
+  <div class=grid-container>
+    <div class="grid-item2">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <!-- <input type="file" name="file" oninvalid="this.setCustomValidity('Please upload a CSV file')" accept=".CSV" required> -->
+        <input type="file" id="files" name="file" accept=".csv">
+        <label for="files"></label>
+        <input type="submit" value=" Upload ">
+       
+      </form>
+    </div>
+
+    <div class="grid-item2">
+      <input type="submit" value=" Classify " >  
+    </div>
+  </div>
+
+  
+
+  <div class=grid-container style="position: relative;">
+    <div class="grid-item" style="height: 400px;"> 
       {% if tables %}
       {% for table in tables %}
       {{ table|safe }}
       {% endfor %}
       <script>
         $(document).ready(function () {
-          $('.data').DataTable();
+          $('.data').DataTable({"paging":false,"scrollY": "300px", 
+        "scrollCollapse": true,
+        "fixedHeader": {
+          "header": true, // Enable fixed header
+          "footer": false}});
         });
       </script>
       {% endif %}
     </div>
-    <div class="image"> <img src="../static/arrow.png" alt="arrow"></div>
-    <div class="grid-item"> Output image
+    <div class="grid-item">
       {% if img_data %}
       <img src="data:image/png;base64,{{ img_data }}" alt="Output Image">
       {% endif %}
     </div>
   </div>
-  <form action="/upload" method="post" enctype="multipart/form-data" class="buttons">
-    <!-- <input type="file" name="file" oninvalid="this.setCustomValidity('Please upload a CSV file')" accept=".CSV" required> -->
-    <input type="file" name="file" accept=".csv" required>
-    <input type="submit" value="Upload">
-  </form>
+  
 </body>
 
 </html>
