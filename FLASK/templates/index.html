@@ -11,8 +11,6 @@
 </head>
 <style>
 
-  
-
   * {
     margin: 0%;
     padding: 0%;
@@ -21,7 +19,6 @@
   .grid-container {
     display: grid;
     grid-template-columns: 3fr 3fr;
-    -ms-grid-column-align: center;
     gap: 10px;
     align-items: center;
     justify-content: center;
@@ -38,14 +35,13 @@
   .grid-item2 {
     text-align: left;
     padding: 20px;
-    display: flex;
   }
 
   .heading {
     padding: 20px;
     text-align: center;
     font-family: Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif ;
-    font-size: 2em;
+    font-size: 1.3em;
     background-image: linear-gradient(to top, rgba(255,0,0,0), #6699ff);
   }
 
@@ -56,6 +52,15 @@
     font-size: 2em;
   }
 
+  .text_bottom{
+    padding: 20px;
+    text-align: center;
+    font-family: Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif ;
+    font-size: 1.3em;
+  }
+
+
+
 </style>
 
 <body>
@@ -63,7 +68,7 @@
     <h1>
       AZURE DEFECT CLASSIFICATION
     </h1>
-    <p style="font-size: larger;">Nanyang Polytechnic EGT217-AI Engineering Project</p>
+    <p style="font-size: large;">Nanyang Polytechnic EGT217-AI Engineering Project</p>
   </header>
 
   <div class=grid-container>
@@ -88,7 +93,10 @@
     </div>
 
     <div class="grid-item2">
-      <input type="submit" value=" Classify " >  
+      <form action="/classify">
+        <input type="submit" value=" Classify " >
+      </form>
+        
     </div>
   </div>
 
@@ -116,6 +124,10 @@
       <img src="data:image/png;base64,{{ img_data }}" alt="Output Image">
       {% endif %}
     </div>
+  </div>
+
+  <div class="text_bottom">
+    LASSO/NO LASSO
   </div>
   
 </body>
