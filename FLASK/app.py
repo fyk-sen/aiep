@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, send_file
+from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+
 import pandas as pd
 from io import StringIO, BytesIO
 import matplotlib.pyplot as plt
@@ -32,6 +34,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
+
     if 'file' not in request.files:
         return redirect(request.url)
 
@@ -46,9 +49,20 @@ def upload():
         
         # Generate the image
         image_data = generate_image(df)
+
+        prediction_key = '6d477f43feea4a2199b13c90b55da503'
+        ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
+        project_id = '1fcea0cc-7aca-4d0d-a3e3-d5b0cb9bcf9c'
+        published_name = 'Lasso Patterns Detection'
+
+        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
+        prediction = predictor.classify_image_with_no_store(project_id, published_name, image_data)
+
+    
         
         return render_template('index.html', tables=[df.to_html(classes='data')],
-                        img_data=image_data)
+                        img_data=image_data, prediction = prediction)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
