@@ -48,7 +48,7 @@ def upload():
         image_data = generate_image(df)
         
         return render_template('index.html', tables=[df.to_html(classes='data')],
-                               img_data=image_data)
+                        img_data=image_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
