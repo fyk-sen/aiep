@@ -25,7 +25,6 @@ def generate_image(df):
 
     # Encode image data in base64
     encoded_image = base64.b64encode(output.getvalue()).decode('utf-8')
-
     return encoded_image
 
 @app.route('/')
@@ -52,14 +51,13 @@ def upload():
 
         prediction_key = '6d477f43feea4a2199b13c90b55da503'
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
-        project_id = '1fcea0cc-7aca-4d0d-a3e3-d5b0cb9bcf9c'
-        published_name = 'Lasso Patterns Detection'
+        project_id = 'd205061d-5fa6-429f-991e-8ade32e785d5'
+        published_name = 'Test'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
         prediction = predictor.classify_image_with_no_store(project_id, published_name, image_data)
 
     
-        
         return render_template('index.html', tables=[df.to_html(classes='data')],
                         img_data=image_data, prediction = prediction)
     
