@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, send_file
 from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+from msrest.authentication import ApiKeyCredentials
 
 import pandas as pd
 from io import StringIO, BytesIO
@@ -49,7 +50,7 @@ def upload():
         # Generate the image
         image_data = generate_image(df)
 
-        prediction_key = '6d477f43feea4a2199b13c90b55da503'
+        prediction_key = ApiKeyCredentials(in_headers={"Prediction-key": '6d477f43feea4a2199b13c90b55da503'})
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
         project_id = 'd205061d-5fa6-429f-991e-8ade32e785d5'
         published_name = 'Test'
