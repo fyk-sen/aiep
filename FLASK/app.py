@@ -56,7 +56,10 @@ def upload():
         published_name = 'Test'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
-        prediction = predictor.classify_image_with_no_store(project_id, published_name, image_data)
+
+        image_bytes = base64.b64decode(image_data)
+
+        prediction = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)
 
     
         return render_template('index.html', tables=[df.to_html(classes='data')],
