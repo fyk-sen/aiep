@@ -61,34 +61,25 @@ def upload():
 
         predict = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)
 
-        tags = []
-        accuracy = []
-
+        predictionlist = []
         for pred in predict.predictions:
 
             tag = str(pred.tag_name)
             tag.replace("''", '')
-            tags.append(tag)
+            predictionlist.append(tag)
 
             acc = '{0:.2f}%'.format(pred.probability * 100)
-            accuracy.append(acc)
-            
+            predictionlist.append(acc)
         
-        no = [tags[0], accuracy[0]]
-        yes = [tags[1], accuracy[1]]
-        
-        if no[1] >= yes[1]:
-            win = no
-            lose = yes
+
+        winner = predictionlist[0]
+        winacc = predictionlist[1]
+        loser = f'{predictionlist[2]} predicted at {predictionlist[3]}'
+
+        if predictionlist[0] == 'No Lasso':
             color = 'green'
         else:
-            win = yes
-            lose = no
             color = 'red'
-
-        winner = win[0]
-        winacc = win[1]
-        loser = f'{lose[0]} predicted at {lose[1]}'
 
 
         return render_template('index.html', tables=[df.to_html(classes='data')],
