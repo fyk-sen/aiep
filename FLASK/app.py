@@ -59,11 +59,40 @@ def upload():
 
         image_bytes = base64.b64decode(image_data)
 
-        prediction = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)
+        predict = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)
 
-    
+        tags = []
+        accuracy = []
+
+        for pred in predict.predictions:
+
+            tag = str(pred.tag_name)
+            tag.replace("''", '')
+            tags.append(tag)
+
+            acc = '{0:.2f}%'.format(pred.probability * 100)
+            accuracy.append(acc)
+            
+        
+        no = [tags[0], accuracy[0]]
+        yes = [tags[1], accuracy[1]]
+        
+        if no[1] >= yes[1]:
+            win = no
+            lose = yes
+            color = 'green'
+        else:
+            win = yes
+            lose = no
+            color = 'red'
+
+        winner = win[0]
+        winacc = win[1]
+        loser = f'{lose[0]} predicted at {lose[1]}'
+
+
         return render_template('index.html', tables=[df.to_html(classes='data')],
-                        img_data=image_data, prediction = prediction)
+                        img_data=image_data, winner = winner, winacc = winacc, loser = loser, color = color)
     
 
 if __name__ == '__main__':
