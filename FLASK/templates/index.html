@@ -94,41 +94,53 @@
 
   
 
-  <div class=grid-container style="position: relative;">
-    <div class="grid-item" style="height: 400px;"> 
+  <div class="grid-container" style="position: relative;">
+    <div id="csv-container" class="grid-item csv-container" style="height: 400px; display: none;"> 
       {% if tables %}
       {% for table in tables %}
       {{ table|safe }}
       {% endfor %}
-      <script>
-        $(document).ready(function () {
-          $('.data').DataTable({"paging":false,"scrollY": "300px", 
-        "scrollCollapse": true,
-        "fixedHeader": {
-          "header": true, // Enable fixed header
-          "footer": false}});
-        });
-      </script>
       {% endif %}
     </div>
-    <div class="grid-item">
+    <div class="grid-item image-container" style="display: none;">
       {% if img_data %}
-      <img src="data:image/png;base64,{{ img_data }}" alt="Output Image">
+      <img src="data:image/png;base64,{{ img_data }}" alt="Output Image" class="output-image">
       {% endif %}
     </div>
-  </div>
+</div>
 
+<div class="text-container" style="width: 100%; text-align: center; display: none;">
   <div class="text_bottom" style="
     padding: 1%;
     text-align: center;
     font-family: Calibri,'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif ;
     font-size: 1.3em;
     background-color: {{color}};">
-
     <h1>{{winner}}</h1>
     <h3>{{winacc}}</h3>
     <i>{{loser}}</i>
   </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // Initialize DataTable after the page has loaded
+    $('.data').DataTable({
+      "paging": false,
+      "scrollY": "300px", // Set a fixed height for vertical scrolling
+      "scrollCollapse": true, // Allow vertical scrollbar to collapse
+      "fixedHeader": {
+        "header": true, // Enable fixed header
+        "footer": false // Disable fixed footer if present
+      },
+      "processing": true, // Show processing indicator
+      "initComplete": function(settings) {
+        // Once the table initialization is complete, fade in all containers together
+        $('.csv-container, .image-container, .text-container').fadeIn();
+      }
+    });
+  });
+</script>
   
 </body>
 
