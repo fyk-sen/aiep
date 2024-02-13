@@ -1,0 +1,4 @@
+White Percentage,Stretch Coords,Squeeze Coords,Vertical Coords Start,Vertical Coords End,Horizontal Coords Start,Horizontal Coords End,Diagonal Coords Start,Diagonal Coords End,Combination Coords Start,Combination Coords End
+0.01, ,"(6, 3)","(30, 13)","(30, 31)", , ,"(89, 35)","(104, 53)", , 
+ , ,"(-4, 33)","(85, 36)","(85, 24)", , , , , , 
+ , ,"(91, 0)", , , , , , , , 
