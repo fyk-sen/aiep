@@ -3,6 +3,7 @@ from azure.cognitiveservices.vision.customvision.prediction import CustomVisionP
 from msrest.authentication import ApiKeyCredentials
 
 import pandas as pd
+import numpy as np
 from io import StringIO, BytesIO
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -13,10 +14,21 @@ app = Flask(__name__)
 def generate_image(df):
     image_data = df['PIXEL_COLOR'].values.reshape(69, 112)
     
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(11.5, 10.5))
+
     ax.imshow(image_data, cmap='gray', interpolation='nearest', origin='lower')
-    ax.set_xlabel('Pixel X')
-    ax.set_ylabel('Pixel Y')
+
+    # Set the aspect ratio to 'auto'
+    ax.set_aspect('auto', adjustable='box')
+    ax.tick_params('both', length=7, width=2, which='major')
+
+    # ax.set_xlabel('Pixel X')
+    # ax.set_ylabel('Pixel Y')
+    plt.xticks(np.arange(0, 112, 4), rotation=90)
+    plt.yticks(np.arange(0, 68, 4))
+    plt.xlabel('PIXEL_X', fontsize=20, labelpad=10)
+    plt.ylabel('PIXEL_Y', fontsize=20, labelpad=10)
+
     ax.set_title(f'IMG_ID: {df.IMG_ID.iloc[0]}')
 
     # Save the figure to a BytesIO object
