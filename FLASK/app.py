@@ -64,8 +64,8 @@ def upload():
 
         prediction_key = ApiKeyCredentials(in_headers={"Prediction-key": '6d477f43feea4a2199b13c90b55da503'})
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
-        project_id = 'd205061d-5fa6-429f-991e-8ade32e785d5'
-        published_name = 'Test'
+        project_id = '951d37a5-62ea-42e7-9dde-5d122ccead2d'
+        published_name = 'Defect Pattern Classification'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
 
@@ -88,7 +88,7 @@ def upload():
         winacc = predictionlist[1]
         loser = f'{predictionlist[2]} predicted at {predictionlist[3]}'
 
-        if predictionlist[0] == 'No Lasso':
+        if predictionlist[0] == 'Nondefective':
             color = 'green'
         else:
             color = 'red'

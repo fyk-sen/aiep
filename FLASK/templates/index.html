@@ -133,7 +133,8 @@
       "processing": true, // Show processing indicator
       "initComplete": function(settings) {
         // Once the table initialization is complete, fade in all containers together
-        $('.fadeani').fadeIn()
+        $('.fadeani').fadeIn();
+        $('.data').DataTable().columns.adjust();
       }
     });
   });
