@@ -12,24 +12,26 @@ import base64
 app = Flask(__name__)
 
 def generate_image(df):
-    image_data = df['PIXEL_COLOR'].values.reshape(69, 112)
-    
+
+    x = df['PIXEL_X'].max()
+    y = df['PIXEL_Y'].max()
+    image_data = df['PIXEL_COLOR'].values.reshape(y+1, x+1)
+    plt.rc('axes',edgecolor='w')
     fig, ax = plt.subplots(figsize=(11.5, 10.5))
-
     ax.imshow(image_data, cmap='gray', interpolation='nearest', origin='lower')
-
-    # Set the aspect ratio to 'auto'
     ax.set_aspect('auto', adjustable='box')
     ax.tick_params('both', length=7, width=2, which='major')
-
-    # ax.set_xlabel('Pixel X')
-    # ax.set_ylabel('Pixel Y')
-    plt.xticks(np.arange(0, 112, 4), rotation=90)
-    plt.yticks(np.arange(0, 68, 4))
+    xticks = np.arange(0, x + 1, 4)
+    if xticks[-1] == x:
+        xticks = xticks[:-1]
+    plt.xticks(xticks, rotation=90)
+    yticks = np.arange(0, y + 1, 4)
+    if yticks[-1] == y:
+        yticks = yticks[:-1]
+    plt.yticks(yticks)
     plt.xlabel('PIXEL_X', fontsize=20, labelpad=10)
     plt.ylabel('PIXEL_Y', fontsize=20, labelpad=10)
-
-    ax.set_title(f'IMG_ID: {df.IMG_ID.iloc[0]}')
+    ax.set_title(f'IMG_ID: {df.IMG_ID.iloc[0]}', fontsize=20, pad=15) 
 
     # Save the figure to a BytesIO object
     output = BytesIO()
@@ -64,8 +66,8 @@ def upload():
 
         prediction_key = ApiKeyCredentials(in_headers={"Prediction-key": '6d477f43feea4a2199b13c90b55da503'})
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
-        project_id = '951d37a5-62ea-42e7-9dde-5d122ccead2d'
-        published_name = 'Defect Pattern Classification'
+        project_id = '9e6f4b27-3470-4751-86d4-92ee4272293b'
+        published_name = 'Defect Classification'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
 
