@@ -66,7 +66,7 @@ def upload():
 
         prediction_key = ApiKeyCredentials(in_headers={"Prediction-key": '6d477f43feea4a2199b13c90b55da503'})
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
-        project_id = '9e6f4b27-3470-4751-86d4-92ee4272293b'
+        project_id = 'c76018f0-0982-4d6d-a8ab-0bdb1ea8185e'
         published_name = 'Defect Classification'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
