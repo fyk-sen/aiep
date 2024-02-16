@@ -66,14 +66,14 @@ def upload():
 
         prediction_key = ApiKeyCredentials(in_headers={"Prediction-key": '6d477f43feea4a2199b13c90b55da503'})
         ENDPOINT = 'https://aieprojecttest.cognitiveservices.azure.com/'
-        project_id = 'c76018f0-0982-4d6d-a8ab-0bdb1ea8185e'
-        published_name = 'Defect Classification'
+        project_id = 'e0a51e66-66ef-41c1-b924-98135a11ca98'
+        published_name = 'Defect Pattern Classification'
 
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_key)
 
         image_bytes = base64.b64decode(image_data)
 
-        predict = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)
+        predict = predictor.classify_image_with_no_store(project_id, published_name, image_bytes)   
 
         predictionlist = []
         for pred in predict.predictions:
